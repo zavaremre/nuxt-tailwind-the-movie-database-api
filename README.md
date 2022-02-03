@@ -1,2 +1,1 @@
-# nuxt-tailwind-the-movie-database-api
-###
+# nuxt-tailwind
