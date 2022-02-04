@@ -20,7 +20,7 @@ export default {
       },
       {
         name: 'apple-mobile-web-app-status-bar-style',
-        content: 'green',
+        content: 'no',
       },
     ],
 
