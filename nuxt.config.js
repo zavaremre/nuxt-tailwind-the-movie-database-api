@@ -1,9 +1,9 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'tailwind',
+    title: 'Filmografi',
     htmlAttrs: {
-      lang: 'en',
+      lang: 'tr',
     },
     meta: [
       { charset: 'utf-8' },
@@ -20,7 +20,7 @@ export default {
       },
       {
         name: 'apple-mobile-web-app-status-bar-style',
-        content: 'no',
+        content: 'black-translucent',
       },
     ],
 
