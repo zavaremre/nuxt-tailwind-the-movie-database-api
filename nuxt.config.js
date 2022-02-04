@@ -26,7 +26,14 @@ export default {
 
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
-
+  pwa: {
+    meta: {
+      name: 'Filmografi',
+      mobileAppIOS: true,
+      appleStatusBarStyle: 'black-translucent',
+      nativeUI: true,
+    },
+  },
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ['@/assets/css/main.css'],
 
@@ -58,6 +65,7 @@ export default {
     '@nuxtjs/stylelint-module',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/pwa',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
