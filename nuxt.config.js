@@ -5,7 +5,6 @@ export default {
     htmlAttrs: {
       lang: 'en',
     },
-    target: 'static',
     meta: [
       { charset: 'utf-8' },
       {
