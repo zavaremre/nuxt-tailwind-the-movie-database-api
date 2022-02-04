@@ -9,7 +9,7 @@ export default {
       { charset: 'utf-8' },
       {
         name: 'viewport',
-        content: 'width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1',
+        content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0',
       },
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
@@ -29,6 +29,7 @@ export default {
   },
   server: {
     port: '3000',
+    host: '0.0.0.0',
   },
 
   serverMiddleware: [

@@ -1,6 +1,6 @@
 module.exports = {
   mode: 'jit',
-  darkMode: 'class',
+  darkMode: 'media',
   variants: {
     display: ['responsive'],
   },
