@@ -1,5 +1,9 @@
 <template>
-  <header class="py-5 px-4 border-b border-gray-100 dark:border-gray-900 w-full">
+  <header class="relative py-5 px-4 border-b border-gray-100 dark:border-gray-900 w-full">
+    <button v-if="$route.fullPath !== '/'" class="absolute left-0 top-0 p-4 h-16 w-16" @click="$router.go(-1)">
+      <img :src="require('~/assets/images/chevron-left.svg')" class="w-6 h-6" alt="" />
+    </button>
+    <button class="absolute right-0 top-0 p-4 h-16 w-16" @click="darkmode">Dark</button>
     <section class="container">
       <div class="logo flex justify-center items-center w-full pb-5">
         <router-link to="/" class="font-bold text-xl">Filmografi</router-link>
@@ -12,3 +16,19 @@
     </section>
   </header>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      dark: false,
+    }
+  },
+
+  methods: {
+    darkmode() {
+      const el = document.html
+      console.log(el)
+    },
+  },
+}
+</script>

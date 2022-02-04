@@ -5,6 +5,7 @@ export default {
     htmlAttrs: {
       lang: 'en',
     },
+
     meta: [
       { charset: 'utf-8' },
       {
@@ -28,7 +29,7 @@ export default {
     dirs: ['~/components'],
   },
   server: {
-    port: '3000',
+    port: '5000',
   },
 
   serverMiddleware: [
