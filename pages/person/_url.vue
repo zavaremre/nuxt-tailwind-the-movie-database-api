@@ -27,9 +27,10 @@
       <section class="py-5 px-5 border-b border-gray-100 dark:border-gray-900">
         <Titlebar title="GALERİ" />
         <div class="grid grid-cols-4 gap-x-4">
-          <div v-for="item in images" :key="item.id">
-            <img class="object-cover mb-4 rounded-lg" :src="'http://image.tmdb.org/t/p/w342/' + item.file_path" />
+          <div v-for="(item, key) in images" :key="key">
+            <img class="object-cover mb-4 rounded-lg" :src="'http://image.tmdb.org/t/p/w342/' + item.file_path" @click="index = key" />
           </div>
+          <CoolLightBox name="cool" :items="items" :index="index" :effect="'fade'" @close="index = null"> </CoolLightBox>
         </div>
       </section>
       <section class="py-5 px-5 border-b border-gray-100 dark:border-gray-900">
@@ -46,9 +47,18 @@
 </template>
 
 <script>
+import CoolLightBox from 'vue-cool-lightbox'
+import 'vue-cool-lightbox/dist/vue-cool-lightbox.min.css'
+
 export default {
+  components: {
+    CoolLightBox,
+  },
+
   data() {
     return {
+      index: null,
+      items: [],
       personId: this.$route.params.url.split('-').pop(),
       cast: {},
       images: {},
@@ -67,6 +77,10 @@ export default {
       this.cast = castData.cast
       const { data: images } = await this.$axios.get(`/api?action=person/${this.personId}/images`)
       this.images = images.profiles
+
+      images.profiles.forEach((el) => {
+        this.items.push('http://image.tmdb.org/t/p/w342/' + el.file_path)
+      })
     } catch (error) {
       console.log(error.message)
     }

@@ -19,6 +19,10 @@ export default {
         return {}
       },
     },
+    index: {
+      type: Number,
+      default: null,
+    },
     customStyle: {
       type: String,
       default: '',

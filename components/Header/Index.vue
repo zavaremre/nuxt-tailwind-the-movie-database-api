@@ -1,7 +1,7 @@
 <template>
   <header class="relative py-5 px-4 border-b border-gray-100 dark:border-gray-900 w-full">
     <button v-if="$route.fullPath !== '/'" class="absolute left-0 top-0 p-4 h-16 w-16" @click="$router.go(-1)">
-      <img :src="require('~/assets/images/chevron-left.svg')" class="w-6 h-6" alt="" />
+      <img :src="require('~/assets/images/chevron-left.svg')" class="w-6 h-6 dark:invert" alt="" />
     </button>
     <section class="container">
       <div class="logo flex justify-center items-center w-full pb-5">
