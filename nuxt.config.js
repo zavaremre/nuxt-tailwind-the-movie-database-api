@@ -22,14 +22,55 @@ export default {
         name: 'apple-mobile-web-app-status-bar-style',
         content: 'black-translucent',
       },
+    ],
+
+    link: [
+      {
+        rel: 'icon',
+        type: 'image/x-icon',
+        href: '/favicon.png',
+      },
       {
         rel: 'apple-touch-icon',
         type: 'image/png',
         href: '/favicon.png',
       },
+      {
+        rel: 'apple-touch-icon',
+        sizes: '180x180',
+        href: '/favicon.png',
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '32x32',
+        href: '/favicon.png',
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '16x16',
+        href: '/favicon.png',
+      },
+      {
+        rel: 'manifest',
+        href: '/favicon.png',
+      },
+      {
+        rel: 'mask-icon',
+        href: '/favicon.png',
+        color: '#5bbad5',
+      },
+      {
+        rel: 'shortcut icon',
+        href: '/favicon.png',
+      },
+      {
+        rel: 'msapplication-TileColor',
+        href: '/favicon.png',
+        content: '#5bbad5',
+      },
     ],
-
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.png' }],
   },
   pwa: {
     meta: {
