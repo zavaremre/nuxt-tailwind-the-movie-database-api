@@ -8,12 +8,14 @@
           <Poster v-if="!$route.query.person" :movie="item" />
         </div>
       </div>
-      <div v-if="page !== 1 || total_pages !== page" class="flex justify-between items-center w-full py-3">
+      <!-- <div v-if="page !== 1 || total_pages !== page" class="flex justify-between items-center w-full py-3">
         <div><button v-if="total_pages !== 1 && page !== 1" class="px-5 py-1.5 border border-gray-100 rounded-2xl" @click="pageChangeNegative">Önceki Sayfa</button></div>
         {{ page }} / {{ total_pages }}
         <div><button v-if="total_pages >= page" class="px-5 py-1.5 border border-gray-100 rounded-2xl" @click="pageChange">Sonraki Sayfa</button></div>
-      </div>
+      </div> -->
     </section>
+    <div v-if="list.length" v-observe-visibility="handleScrolledToBottom"></div>
+    <!-- <div v-if="page >= total_pages" class="flex justify-center items-center w-full py-3">Hepsi Bu Kadar :)</div> -->
   </div>
 </template>
 
@@ -30,10 +32,10 @@ export default {
   async fetch() {
     try {
       await this.$axios.get(`/api?action=${this.$route.query.data}&language=tr-TR&append_to_response=credits&sort_by=date&page=${this.page}&region=tr`).then((response) => {
-        this.list = response.data.results
+        this.list.push(...response.data.results)
         this.page = response.data.page
         this.total_pages = response.data.total_pages
-        if (process.browser) window.scrollTo({ top: 0, behavior: 'smooth' })
+        // if (process.browser) window.scrollTo({ top: 0, behavior: 'smooth' })
       })
     } catch (error) {}
   },
@@ -42,27 +44,24 @@ export default {
     '$route.query': '$fetch',
   },
   methods: {
-    pageChange() {
-      try {
-        this.list = []
-        this.page++
-        this.$axios.get(`/api?action=${this.$route.query.data}&language=tr-TR&append_to_response=credits&sort_by=date&page=${this.page}&region=tr`).then((response) => {
-          this.list = response.data.results
-
-          this.total_pages = response.data.total_pages
-          if (process.browser) window.scrollTo({ top: 0, behavior: 'smooth' })
-        })
-      } catch (error) {}
+    handleScrolledToBottom(isVisible) {
+      if (!isVisible) {
+        return
+      }
+      if (this.page >= this.total_pages) {
+        return
+      }
+      this.page++
+      this.fetch()
+      console.log('first')
     },
-    pageChangeNegative() {
+    fetch() {
       try {
-        this.list = []
-        this.page--
         this.$axios.get(`/api?action=${this.$route.query.data}&language=tr-TR&append_to_response=credits&sort_by=date&page=${this.page}&region=tr`).then((response) => {
-          this.list = response.data.results
+          this.list.push(...response.data.results)
 
           this.total_pages = response.data.total_pages
-          if (process.browser) window.scrollTo({ top: 0, behavior: 'smooth' })
+          // if (process.browser) window.scrollTo({ top: 0, behavior: 'smooth' })
         })
       } catch (error) {}
     },
