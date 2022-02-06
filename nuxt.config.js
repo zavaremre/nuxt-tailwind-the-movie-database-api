@@ -52,10 +52,7 @@ export default {
         sizes: '16x16',
         href: '/favicon.png',
       },
-      {
-        rel: 'manifest',
-        href: '/favicon.png',
-      },
+
       {
         rel: 'mask-icon',
         href: '/favicon.png',
@@ -64,11 +61,6 @@ export default {
       {
         rel: 'shortcut icon',
         href: '/favicon.png',
-      },
-      {
-        rel: 'msapplication-TileColor',
-        href: '/favicon.png',
-        content: '#5bbad5',
       },
     ],
   },
