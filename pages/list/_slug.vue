@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full">
+  <div class="container">
     <section class="py-5 px-5 border-b border-gray-100 dark:border-gray-900">
       <Titlebar title="TÜMÜ" />
       <div class="grid grid-cols-3 gap-x-4">

@@ -14,6 +14,7 @@
           </div>
           <h1><a class="text-xxs font-medium text-white" :href="detailMovie.homepage" target="_blank">Web Sitesi</a></h1>
           <h1 class="text-xxs font-medium text-white truncate w-full">{{ detailMovie.release_date | formatDate('DD MMMM YYYY') }}</h1>
+          <h1 class="text-lg font-bold text-orange-600 truncate text-left py-0.5">{{ detailMovie.vote_average }}</h1>
         </div>
       </div>
     </div>
@@ -73,10 +74,10 @@
           </div>
         </div>
       </section>
-      <section class="py-5 px-2.5 border-b border-gray-100 dark:border-gray-900">
+      <section class="py-5 px-5 border-b border-gray-100 dark:border-gray-900">
         <Titlebar title="BENZER FİLMLER" />
-        <div class="relative w-full flex snap-x snap-mandatory overflow-y-hidden overflow-x-scroll">
-          <div v-for="movie in detailMovie.similar_movies.results" :key="movie.id" class="flex-shrink-0 px-2.5 w-1/3 basis-1/3">
+        <div class="grid grid-cols-3 gap-x-4">
+          <div v-for="movie in detailMovie.similar_movies.results" :key="movie.id" class="mb-4">
             <Poster :movie="movie" />
           </div>
         </div>
