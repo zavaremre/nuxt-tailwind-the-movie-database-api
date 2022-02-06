@@ -22,9 +22,14 @@ export default {
         name: 'apple-mobile-web-app-status-bar-style',
         content: 'black-translucent',
       },
+      {
+        rel: 'apple-touch-icon',
+        type: 'image/png',
+        href: '/favicon.png',
+      },
     ],
 
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.png' }],
   },
   pwa: {
     meta: {
