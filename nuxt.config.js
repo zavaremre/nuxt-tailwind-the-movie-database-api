@@ -33,10 +33,19 @@ export default {
   },
   pwa: {
     meta: {
-      name: 'Filmografi',
+      title: 'Filmografi',
+      author: 'EMRE ZAVAR',
       mobileAppIOS: true,
       appleStatusBarStyle: 'black-translucent',
       nativeUI: true,
+    },
+    manifest: {
+      name: 'Filmografi',
+      short_name: 'Filmografi',
+      lang: 'tr',
+    },
+    icon: {
+      fileName: '/favicon.png',
     },
   },
   // Global CSS: https://go.nuxtjs.dev/config-css
