@@ -18,7 +18,24 @@
           <strong v-if="person.deathday" class="mb-2 font-semibold text-xs">{{ person.deathday | formatDate('DD MMMM YYYY') }}</strong>
         </div>
       </section>
+      <section class="py-5 px-5 border-b border-gray-100 dark:border-gray-900">
+        <Titlebar title="SOSYAL MEDYA HESAPLARI" />
+        <div class="relative w-full flex justify-center items-center">
+          <div v-if="person.external_ids.facebook_id">
+            <a class="p-3 block" :href="'https://www.facebook.com/' + person.external_ids.facebook_id" target="_blank"> <img class="w-8 h-8" :src="require('~/assets/images/facebook.png')" alt="" /> </a>
+          </div>
 
+          <div v-if="person.external_ids.instagram_id">
+            <a class="p-3 block" :href="'https://www.instagram.com/' + person.external_ids.instagram_id" target="_blank"> <img class="w-8 h-8" :src="require('~/assets/images/instagram.png')" alt="" /> </a>
+          </div>
+          <div v-if="person.external_ids.twitter_id">
+            <a class="p-3 block" :href="'https://twitter.com/' + person.external_ids.twitter_id" target="_blank"> <img class="w-8 h-8" :src="require('~/assets/images/twitter.png')" alt="" /> </a>
+          </div>
+          <div v-if="person.external_ids.imdb_id">
+            <a class="p-3 block" :href="'https://www.imdb.com/title/' + person.external_ids.imdb_id" target="_blank"> <img class="w-12 h-12" :src="require('~/assets/images/imdb.png')" alt="" /> </a>
+          </div>
+        </div>
+      </section>
       <section class="py-5 px-5 border-b border-gray-100 dark:border-gray-900">
         <Titlebar title="BİYOGRAFİ" />
         <p v-if="person.biography" class="text-xs font-normal leading-6">{{ person.biography }}</p>
@@ -30,7 +47,7 @@
           <div v-for="(item, key) in images" :key="key">
             <img class="object-cover mb-4 rounded-lg" :src="'http://image.tmdb.org/t/p/w342/' + item.file_path" @click="index = key" />
           </div>
-          <CoolLightBox name="cool" :items="items" :index="index" :effect="'fade'" @close="index = null"> </CoolLightBox>
+          <CoolLightBox name="cool" :items="items" :index="index" :autoplay="true" :use-zoom-bar="true" :full-screen="true" :close-on-click-outside-mobile="true" @close="index = null"> </CoolLightBox>
         </div>
       </section>
       <section class="py-5 px-5 border-b border-gray-100 dark:border-gray-900">
@@ -63,6 +80,12 @@ export default {
       cast: {},
       images: {},
       person: {
+        external_ids: {
+          facebook_id: null,
+          imdb_id: null,
+          instagram_id: null,
+          twitter_id: null,
+        },
         known_for_department: '',
       },
       page: 1,

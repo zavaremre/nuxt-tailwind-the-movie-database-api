@@ -21,14 +21,14 @@
       <section v-if="detailMovie.videos.results.length" class="py-5 px-5 border-b border-gray-100 dark:border-gray-900">
         <Titlebar title="FRAGMAN" />
         <div class="relative w-full flex snap-x snap-mandatory overflow-y-hidden overflow-x-scroll">
-          <div v-for="(video, key) in detailMovie.videos.results" :key="key" class="snap-center flex-shrink-0 px-2.5 w-1/3 basis-1/3">
+          <div v-for="(video, key) in detailMovie.videos.results" :key="key" class="snap-center flex-shrink-0 px-2.5 basis-1/2 w-1/2">
             <div @click="index = key">
-              <img :src="`https://img.youtube.com/vi/${video.key}/hqdefault.jpg`" class="w-full object-cover rounded-xl mb-3" :alt="video.name" />
+              <img :src="`https://img.youtube.com/vi/${video.key}/hqdefault.jpg`" class="border border-gray-100 dark:border-gray-900 w-full object-cover rounded-xl mb-3" :alt="video.name" />
               <h1 class="text-xxs font-medium text-gray-900 dark:text-white leading-5">{{ video.name }}</h1>
               <h2 class="text-xxs font-medium text-gray-900 dark:text-white">{{ video.published_at | formatDate('DD MMMM YYYY') }}</h2>
             </div>
           </div>
-          <CoolLightBox name="cool" :items="items" :index="index" :effect="'fade'" @close="index = null"> </CoolLightBox>
+          <CoolLightBox name="cool" :items="items" :index="index" :autoplay="true" :use-zoom-bar="true" :full-screen="true" :close-on-click-outside-mobile="true" @close="index = null"> </CoolLightBox>
         </div>
       </section>
       <section class="py-5 px-5 border-b border-gray-100 dark:border-gray-900">
@@ -40,6 +40,36 @@
         <div class="relative w-full flex snap-x snap-mandatory overflow-x-scroll overflow-y-hidden gap-x-5">
           <div v-for="(person, index) in detailMovie.credits.cast" :key="index" class="flex flex-col min-w-[22.4%] basis-[22.4%]">
             <Person :person="person" :index="index" />
+          </div>
+        </div>
+      </section>
+      <section class="py-5 px-5 border-b border-gray-100 dark:border-gray-900">
+        <Titlebar title="YAPIM ŞİRKETLERİ" />
+        <div class="relative w-full flex justify-start snap-x snap-mandatory overflow-y-hidden overflow-x-scrol gap-x-4">
+          <div v-for="item in detailMovie.production_companies" :key="item.id" class="relative flex justify-center items-center max-w-[25%] min-w-[25%] bg-white rounded-lg p-4">
+            <img v-if="item.logo_path" :src="'http://image.tmdb.org/t/p/w1280/' + item.logo_path" alt="" class="" />
+            <strong v-if="!item.logo_path" class="flex justify-center items-center text-sm font-bold w-full text-center text-gray-800">
+              {{ item.name }}
+            </strong>
+          </div>
+          <div></div>
+        </div>
+      </section>
+      <section class="py-5 px-5 border-b border-gray-100 dark:border-gray-900">
+        <Titlebar title="SOSYAL MEDYA HESAPLARI" />
+        <div class="relative w-full flex justify-center items-center">
+          <div v-if="detailMovie.external_ids.facebook_id">
+            <a class="p-3 block" :href="'https://www.facebook.com/' + detailMovie.external_ids.facebook_id" target="_blank"> <img class="w-8 h-8" :src="require('~/assets/images/facebook.png')" alt="" /> </a>
+          </div>
+
+          <div v-if="detailMovie.external_ids.instagram_id">
+            <a class="p-3 block" :href="'https://www.instagram.com/' + detailMovie.external_ids.instagram_id" target="_blank"> <img class="w-8 h-8" :src="require('~/assets/images/instagram.png')" alt="" /> </a>
+          </div>
+          <div v-if="detailMovie.external_ids.twitter_id">
+            <a class="p-3 block" :href="'https://twitter.com/' + detailMovie.external_ids.twitter_id" target="_blank"> <img class="w-8 h-8" :src="require('~/assets/images/twitter.png')" alt="" /> </a>
+          </div>
+          <div v-if="detailMovie.external_ids.imdb_id">
+            <a class="p-3 block" :href="'https://www.imdb.com/title/' + detailMovie.external_ids.imdb_id" target="_blank"> <img class="w-12 h-12" :src="require('~/assets/images/imdb.png')" alt="" /> </a>
           </div>
         </div>
       </section>
@@ -70,6 +100,12 @@ export default {
       items: [],
       movieId: this.$route.params.url.split('-').pop(),
       detailMovie: {
+        external_ids: {
+          facebook_id: null,
+          imdb_id: null,
+          instagram_id: null,
+          twitter_id: null,
+        },
         credits: {},
         similar_movies: {},
         videos: {
