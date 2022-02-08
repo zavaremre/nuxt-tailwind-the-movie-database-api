@@ -1,6 +1,5 @@
 <template>
   <div class="w-full">
-    {{ $route.query.random }}
     <div class="relative flex justify-center items-center w-full h-64 bg-cover bg-blend-overlay bg-black dark:bg-stone-800 bg-opacity-75 after:backdrop-blur-xs after:w-full after:h-full after:absolute after:left-0 after:top-0 after:z-0" :style="`background-image:url(http://image.tmdb.org/t/p/w1280/${detailMovie.backdrop_path})`">
       <div class="container relative z-10 flex justify-center items-center w-full px-5">
         <img class="w-32 rounded-2xl mr-4" :src="`http://image.tmdb.org/t/p/w1280/${detailMovie.poster_path}`" alt="" />
@@ -74,6 +73,14 @@
           </div>
         </div>
       </section>
+      <section v-if="detailMovie.belongs_to_collection" class="py-5 px-5 border-b border-gray-100 dark:border-gray-900">
+        <Titlebar title="DEVAM FİLMLERİ" />
+        <div class="grid grid-cols-3 gap-x-4">
+          <div v-for="collection in collectionsList" :key="collection.id" class="mb-4">
+            <Poster :movie="collection" />
+          </div>
+        </div>
+      </section>
       <section class="py-5 px-5 border-b border-gray-100 dark:border-gray-900">
         <Titlebar title="BENZER FİLMLER" />
         <div class="grid grid-cols-3 gap-x-4">
@@ -100,7 +107,11 @@ export default {
       index: null,
       items: [],
       movieId: this.$route.params.url.split('-').pop(),
+      collections: [],
+      collectionsList: [],
+      collectionsId: null,
       detailMovie: {
+        belongs_to_collection: {},
         external_ids: {
           facebook_id: null,
           imdb_id: null,
@@ -123,7 +134,15 @@ export default {
         response.data.videos.results.forEach((el) => {
           this.items.push('https://www.youtube.com/watch?v=' + el.key)
         })
+        this.collections = response.data.belongs_to_collection
+        this.collectionsId = response.data.belongs_to_collection.id
+
         if (process.browser) window.scrollTo({ top: 0, behavior: 'smooth' })
+      })
+    } catch (error) {}
+    try {
+      this.posts = await this.$axios.get(`/api?action=collection/${this.collectionsId}&region=tr&language=tr-TR`).then((response) => {
+        this.collectionsList = response.data.parts
       })
     } catch (error) {}
   },
