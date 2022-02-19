@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    {{ $route.query.type }}
     <section class="py-5 px-5 border-b border-gray-100 dark:border-gray-900">
       <Titlebar v-if="$route.query.categorie" :title="$route.query.title" />
       <Titlebar v-else title="TÜMÜ" />

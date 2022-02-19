@@ -85,7 +85,7 @@ export default {
   css: ['@/assets/css/main.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~/plugins/moment.js', '~/plugins/vue-observe-visibility', '~/plugins/firebase.js'],
+  plugins: ['~/plugins/moment.js', '~/plugins/vue-observe-visibility'],
   build: {
     // You can extend webpack config here
     loaders: {
@@ -102,9 +102,7 @@ export default {
     port: '3000',
     // host: '0.0.0.0',
   },
-  router: {
-    serverMiddleware: ['~/server-middleware/authenticated.js'],
-  },
+
   serverMiddleware: [
     // Will register file from project server-middleware directory to handle /server-middleware/* requires
     {
