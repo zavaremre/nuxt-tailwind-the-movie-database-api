@@ -1,5 +1,5 @@
 <template>
-  <div class="movie flex flex-col w-full justify-start h-full">
+  <div class="movie relative flex flex-col w-full justify-start h-full">
     <router-link :to="`/detail/${url}`" class="relative h-full">
       <img v-if="movie.poster_path" class="w-full object-cover rounded-xl mb-3" :src="'http://image.tmdb.org/t/p/w342/' + movie.poster_path" />
       <img v-if="!movie.poster_path" class="w-full object-cover rounded-xl mb-3" :src="require('~/assets/images/no.svg')" />
@@ -25,6 +25,11 @@ export default {
         return {}
       },
     },
+  },
+  data() {
+    return {
+      testCollection: [],
+    }
   },
   computed: {
     url() {

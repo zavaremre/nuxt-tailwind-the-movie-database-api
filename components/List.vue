@@ -1,6 +1,6 @@
 <template>
   <section class="relative w-full flex snap-x snap-mandatory overflow-x-auto overflow-y-hidden">
-    <div v-for="(item, i) in list" :key="i" class="flex-shrink-0 px-2.5 snap-center" :class="customStyle">
+    <div v-for="(item, i) in list" :key="i" class="flex-shrink-0 px-2.5 snap-center sm:w-1/6 sm:basis-1/6" :class="customStyle">
       <slot name="content" :item="item"></slot>
     </div>
   </section>

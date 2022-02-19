@@ -3,10 +3,16 @@
     <button v-if="$route.fullPath !== '/'" class="absolute left-0 top-0 p-4 h-16 w-16" @click="$router.go(-1)">
       <img :src="require('~/assets/images/chevron-left.svg')" class="w-6 h-6 dark:invert" alt="" />
     </button>
+
     <section class="container">
       <div class="logo flex justify-center items-center w-full pb-5">
         <router-link to="/" class="font-bold text-xl">Filmografi</router-link>
       </div>
+      <!-- <div class="absolute right-0 top-0 p-4">
+        <p v-if="user" class="flex text-xxs">
+          <router-link to="/aut/profile">Hesabım</router-link>
+        </p>
+      </div> -->
     </section>
     <section class="container">
       <div class="search">
@@ -19,15 +25,15 @@
 export default {
   data() {
     return {
+      user: null,
       dark: false,
     }
   },
-
-  methods: {
-    darkmode() {
-      const el = document.html
-      console.log(el)
-    },
+  created() {
+    const self = this
+    this.$firebase.auth().onAuthStateChanged(function (user) {
+      self.user = user
+    })
   },
 }
 </script>

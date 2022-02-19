@@ -5,6 +5,9 @@ export default {
   genre(state, value) {
     state.genre = value
   },
+  user(state, value) {
+    state.user = value
+  },
   loading(state, value) {
     state.loading = value
   },

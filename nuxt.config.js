@@ -85,17 +85,26 @@ export default {
   css: ['@/assets/css/main.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~/plugins/moment.js', '~/plugins/vue-observe-visibility'],
-
+  plugins: ['~/plugins/moment.js', '~/plugins/vue-observe-visibility', '~/plugins/firebase.js'],
+  build: {
+    // You can extend webpack config here
+    loaders: {
+      vue: {
+        prettify: false,
+      },
+    },
+  },
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: {
     dirs: ['~/components'],
   },
   server: {
     port: '3000',
-    host: '0.0.0.0',
+    // host: '0.0.0.0',
   },
-
+  router: {
+    serverMiddleware: ['~/server-middleware/authenticated.js'],
+  },
   serverMiddleware: [
     // Will register file from project server-middleware directory to handle /server-middleware/* requires
     {
@@ -114,19 +123,12 @@ export default {
     '@nuxtjs/tailwindcss',
     '@nuxtjs/pwa',
   ],
-
+  axios: {
+    // baseUrl: process.env.BASEURL || '',
+    FIRE_ENV: process.env.FIRE_ENV,
+  },
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: ['@nuxtjs/axios'],
-  axios: {
-    baseUrl: process.env.BASEURL || '',
-  },
 
-  // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-    loaders: {
-      vue: {
-        prettify: false,
-      },
-    },
-  },
+  // Router Settings
 }

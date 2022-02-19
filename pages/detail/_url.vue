@@ -38,7 +38,7 @@
       <section class="py-5 px-5 border-b border-gray-100 dark:border-gray-900">
         <Titlebar title="OYUNCULAR" />
         <div class="relative w-full flex snap-x snap-mandatory overflow-x-scroll overflow-y-hidden gap-x-5">
-          <div v-for="(person, index) in detailMovie.credits.cast" :key="index" class="flex flex-col min-w-[22.4%] basis-[22.4%]">
+          <div v-for="(person, index) in detailMovie.credits.cast" :key="index" class="flex flex-col min-w-[22.4%] basis-[22.4%] sm:min-w-[12%] sm:!basis-1/6">
             <Person :person="person" :index="index" />
           </div>
         </div>
@@ -75,7 +75,7 @@
       </section>
       <section v-if="detailMovie.belongs_to_collection" class="py-5 px-5 border-b border-gray-100 dark:border-gray-900">
         <Titlebar title="DEVAM FİLMLERİ" />
-        <div class="grid grid-cols-3 gap-x-4">
+        <div class="grid grid-cols-3 sm:grid-cols-6 gap-x-4">
           <div v-for="collection in collectionsList" :key="collection.id" class="mb-4">
             <Poster :movie="collection" />
           </div>
@@ -83,7 +83,7 @@
       </section>
       <section class="py-5 px-5 border-b border-gray-100 dark:border-gray-900">
         <Titlebar title="BENZER FİLMLER" />
-        <div class="grid grid-cols-3 gap-x-4">
+        <div class="grid grid-cols-3 sm:grid-cols-6 gap-x-4">
           <div v-for="movie in detailMovie.similar_movies.results" :key="movie.id" class="mb-4">
             <Poster :movie="movie" />
           </div>
@@ -94,6 +94,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import CoolLightBox from 'vue-cool-lightbox'
 import 'vue-cool-lightbox/dist/vue-cool-lightbox.min.css'
 
@@ -145,6 +146,9 @@ export default {
         this.collectionsList = response.data.parts
       })
     } catch (error) {}
+  },
+  computed: {
+    ...mapGetters('global', ['user']),
   },
   watch: {
     '$route.query': '$fetch',

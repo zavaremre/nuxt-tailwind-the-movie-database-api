@@ -1,4 +1,7 @@
 export default {
+  user(state) {
+    return state.user
+  },
   searchingMovies(state) {
     return state.searchingMovies
   },

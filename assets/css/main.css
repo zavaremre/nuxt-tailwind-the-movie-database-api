@@ -10,7 +10,6 @@
     dark:text-white
     dark:bg-black
     bg-white
-    md:w-[380px]
     md:mx-auto;
   }
   .container {

@@ -1,14 +1,16 @@
 <template>
   <div class="w-full">
-    <section class="py-5 px-5 border-b border-gray-100 dark:border-gray-900">
-      <Titlebar title="ARAMA SONUÇLARI" />
-      <div class="grid grid-cols-3 gap-x-4">
-        <div v-for="item in searchingMovies" :key="item.id" class="mb-4">
-          <Person v-if="genre === 'person'" :person="item" custom-style="" image-style="h-auto rounded-lg bg-none" no-image-style="rounded-lg h-32" />
-          <Poster v-if="genre !== 'person'" :movie="item" />
+    <div class="container">
+      <section class="py-5 px-5 border-b border-gray-100 dark:border-gray-900">
+        <Titlebar title="ARAMA SONUÇLARI" />
+        <div class="grid grid-cols-3 sm:grid-cols-6 gap-x-4">
+          <div v-for="item in searchingMovies" :key="item.id" class="mb-4">
+            <Person v-if="genre === 'person'" :person="item" custom-style="" image-style="h-auto rounded-lg bg-none" no-image-style="rounded-lg h-32" />
+            <Poster v-if="genre !== 'person'" :movie="item" />
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </div>
 </template>
 

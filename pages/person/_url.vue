@@ -43,7 +43,7 @@
       </section>
       <section class="py-5 px-5 border-b border-gray-100 dark:border-gray-900">
         <Titlebar title="GALERİ" />
-        <div class="grid grid-cols-4 gap-x-4">
+        <div class="grid grid-cols-4 sm:grid-cols-8 gap-x-4">
           <div v-for="(item, key) in images" :key="key">
             <img class="object-cover mb-4 rounded-lg" :src="'http://image.tmdb.org/t/p/w342/' + item.file_path" @click="index = key" />
           </div>
@@ -52,7 +52,7 @@
       </section>
       <section class="py-5 px-5 border-b border-gray-100 dark:border-gray-900">
         <Titlebar title="OYUNCUNUN FİLMLERİ" />
-        <div class="grid grid-cols-3 gap-x-4">
+        <div class="grid grid-cols-3 sm:grid-cols-6 gap-x-4">
           <div v-for="item in cast" :key="item.id" class="mb-4">
             <Poster :movie="item" />
           </div>
