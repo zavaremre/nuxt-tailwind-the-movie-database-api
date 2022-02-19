@@ -122,11 +122,11 @@ export default {
     '@nuxtjs/pwa',
   ],
   axios: {
-    // baseUrl: process.env.BASEURL || '',
-    FIRE_ENV: process.env.FIRE_ENV,
+    baseUrl: process.env.BASEURL || '',
+  
   },
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxtjs/axios'],
+  modules: ['@nuxtjs/axios',],
 
   // Router Settings
 }
