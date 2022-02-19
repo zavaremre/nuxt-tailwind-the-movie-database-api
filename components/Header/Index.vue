@@ -9,6 +9,9 @@
         <router-link to="/" class="font-bold text-xl">Filmografi</router-link>
       </div>
     </section>
+    <button class="absolute right-0 top-0 p-4 h-16 w-16" @click="reload">
+      <img :src="require('~/assets/images/reload.svg')" class="w-6 h-6 dark:invert" alt="" />
+    </button>
     <section class="container">
       <div class="search">
         <HeaderSearch />
@@ -16,3 +19,12 @@
     </section>
   </header>
 </template>
+<script>
+export default {
+  methods: {
+    reload() {
+      this.$router.go(this.$router.currentRoute)
+    },
+  },
+}
+</script>
