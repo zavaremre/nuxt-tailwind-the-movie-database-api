@@ -1,6 +1,5 @@
 <template>
   <span>
-    {{ $route.query.dicover }}
     <section v-if="genre !== null && genreId" class="bg-gray-100 dark:bg-stone-800 py-4">
       <div class="container">
         <div class="filter flex sm:flex-row justify-center items-center w-full px-4 sm:px-0">
