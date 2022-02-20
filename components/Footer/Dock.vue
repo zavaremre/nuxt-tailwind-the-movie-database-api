@@ -23,7 +23,7 @@
       <div class="relative flex flex-col justify-start items-center w-full h-[60%] bottom-16 rounded-t-3xl z-40 bg-white dark:bg-stone-900 overflow-y-scroll px-4 py-16">
         <button class="absolute flex justify-center items-center right-0 top-0 p-3 w-5 h-5 rounded-full bg-white bg-opacity-95 m-4 text-gray-900" @click="menu = !menu">X</button>
         <div v-for="item in categories" :key="item.id">
-          <router-link class="block text-lg font-semibold py-2.5 uppercase" :to="`/list/${url(item.title)}?id=${item.id}`">{{ item.title }}</router-link>
+          <router-link class="block text-lg font-semibold py-2.5 uppercase" :to="`/list/${url(item.title)}?id=${item.id}&dicover=true`">{{ item.title }}</router-link>
         </div>
       </div>
       <div class="overlay fixed inset-0 z-10 w-full h-full bg-gray-600 bg-opacity-80 bottom-16" @click="menu = !menu"></div>

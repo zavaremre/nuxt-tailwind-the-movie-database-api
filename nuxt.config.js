@@ -1,5 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
+  pageTransition: 'intro',
+  layoutTransition: 'intro',
   head: {
     title: 'Filmografi',
     htmlAttrs: {

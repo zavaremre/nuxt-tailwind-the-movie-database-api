@@ -21,7 +21,7 @@
         </template>
       </List>
       <div class="flex justify-center items-center w-full">
-        <router-link :to="`/list/${url('gunun-oyuncalari')}?type=trending/person/day`" class="inline-flex justify-center items-center px-5 py-1.5 mt-5 dark:text-white text-gray-900 font-bold rounded-2xl border border-gray-100">Tümünü Gör</router-link>
+        <router-link :to="`/list/${url('gunun-oyuncalari')}?dicover=false&type=trending/person/day`" class="inline-flex justify-center items-center px-5 py-1.5 mt-5 dark:text-white text-gray-900 font-bold rounded-2xl border border-gray-100">Tümünü Gör</router-link>
       </div>
     </section>
     <section class="py-5 px-2.5 border-b border-gray-100 dark:border-gray-900">
@@ -32,7 +32,7 @@
         </template>
       </List>
       <div class="flex justify-center items-center w-full">
-        <router-link :to="`/list/${url('vizyondakiler')}?type=movie/now_playing`" class="inline-flex justify-center items-center px-5 py-1.5 mt-5 dark:text-white text-gray-900 font-bold rounded-2xl border border-gray-100">Tümünü Gör</router-link>
+        <router-link :to="`/list/${url('vizyondakiler')}?dicover=false&type=movie/now_playing`" class="inline-flex justify-center items-center px-5 py-1.5 mt-5 dark:text-white text-gray-900 font-bold rounded-2xl border border-gray-100">Tümünü Gör</router-link>
       </div>
     </section>
 
@@ -44,7 +44,7 @@
         </template>
       </List>
       <div class="flex justify-center items-center w-full">
-        <router-link :to="`/list/${url('populer-filmler')}?type=movie/popular`" class="inline-flex justify-center items-center px-5 py-1.5 mt-5 dark:text-white text-gray-900 font-bold rounded-2xl border border-gray-100">Tümünü Gör</router-link>
+        <router-link :to="`/list/${url('populer-filmler')}?dicover=false&type=movie/popular`" class="inline-flex justify-center items-center px-5 py-1.5 mt-5 dark:text-white text-gray-900 font-bold rounded-2xl border border-gray-100">Tümünü Gör</router-link>
       </div>
     </section>
     <section class="py-5 px-2.5 border-b border-gray-100 dark:border-gray-900">
@@ -55,7 +55,7 @@
         </template>
       </List>
       <div class="flex justify-center items-center w-full">
-        <router-link :to="`/list/${url('en-cok-oy-alan-filmler')}?type=movie/top_rated`" class="inline-flex justify-center items-center px-5 py-1.5 mt-5 dark:text-white text-gray-900 font-bold rounded-2xl border border-gray-100">Tümünü Gör</router-link>
+        <router-link :to="`/list/${url('en-cok-oy-alan-filmler')}?dicover=false&type=movie/top_rated`" class="inline-flex justify-center items-center px-5 py-1.5 mt-5 dark:text-white text-gray-900 font-bold rounded-2xl border border-gray-100">Tümünü Gör</router-link>
       </div>
     </section>
     <section class="py-5 px-2.5 border-b border-gray-100 dark:border-gray-900">
@@ -66,7 +66,7 @@
         </template>
       </List>
       <div class="flex justify-center items-center w-full">
-        <router-link :to="`/list/${url('yakinda-vizyonda')}?type=movie/upcoming`" class="inline-flex justify-center items-center px-5 py-1.5 mt-5 dark:text-white text-gray-900 font-bold rounded-2xl border border-gray-100">Tümünü Gör</router-link>
+        <router-link :to="`/list/${url('yakinda-vizyonda')}?dicover=false&type=movie/upcoming`" class="inline-flex justify-center items-center px-5 py-1.5 mt-5 dark:text-white text-gray-900 font-bold rounded-2xl border border-gray-100">Tümünü Gör</router-link>
       </div>
     </section>
   </section>

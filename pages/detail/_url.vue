@@ -44,6 +44,14 @@
         </div>
       </section>
       <section class="py-5 px-5 border-b border-gray-100 dark:border-gray-900">
+        <Titlebar title="EKİB" />
+        <div class="relative w-full flex snap-x snap-mandatory overflow-x-scroll overflow-y-hidden gap-x-5">
+          <div v-for="(person, key) in detailMovie.credits.crew" :key="key" class="flex flex-col min-w-[22.4%] basis-[22.4%] sm:min-w-[12%] sm:!basis-1/6">
+            <Person :person="person" :index="key" :crew="true" />
+          </div>
+        </div>
+      </section>
+      <section class="py-5 px-5 border-b border-gray-100 dark:border-gray-900">
         <Titlebar title="YAPIM ŞİRKETLERİ" />
         <div class="relative w-full flex justify-start snap-x snap-mandatory overflow-y-hidden overflow-x-scrol gap-x-4">
           <div v-for="item in detailMovie.production_companies" :key="item.id" class="relative flex justify-center items-center max-w-[25%] min-w-[25%] bg-white rounded-lg p-4">
@@ -119,7 +127,10 @@ export default {
           instagram_id: null,
           twitter_id: null,
         },
-        credits: {},
+        credits: {
+          crew: {},
+        },
+
         similar_movies: {},
         videos: {
           results: [],
@@ -148,6 +159,9 @@ export default {
     } catch (error) {}
   },
   computed: {
+    // sortArray() {
+    //   return this.detailMovie.credits.crew.filter(() => true).sort((a, b) => a.popularity > b.popularity)
+    // },
     ...mapGetters('global', ['user']),
   },
   watch: {

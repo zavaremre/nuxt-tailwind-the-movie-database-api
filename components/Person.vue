@@ -5,7 +5,8 @@
       <img v-if="!person.profile_path" :class="noImageStyle" class="w-full object-cover rounded-xl mb-3" :src="require('~/assets/images/no.svg')" />
     </router-link>
     <strong class="text-xs font-semibold leading-4 text-center w-100">{{ person.name }}</strong>
-    <strong v-if="person.character" class="text-xxs font-normal leading-4 text-center w-100">{{ person.character }}</strong>
+    <strong v-if="person.character && !crew" class="text-xxs font-normal leading-4 text-center w-100">{{ person.character }}</strong>
+    <strong v-if="!person.character && crew" class="text-xxs font-normal leading-4 text-center w-100">{{ person.department.replace('Editing', 'Kurgu').replace('Sound', 'Ses').replace('Production', 'Yapım').replace('Art', 'Sanat').replace('Directing', 'Yönetmen').replace('Writing', 'Yazar').replace('Costume & Make-Up', 'Kostüm ve Makyaj').replace('Visual Effects', 'Özel Efekt').replace('Crew', 'Ekib').replace('Lighting', 'Işık').replace('Camera', 'Kamera') }}</strong>
   </div>
 </template>
 
@@ -34,6 +35,10 @@ export default {
     noImageStyle: {
       type: String,
       default: '',
+    },
+    crew: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {

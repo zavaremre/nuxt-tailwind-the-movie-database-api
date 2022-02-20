@@ -1,5 +1,6 @@
 <template>
   <span>
+    {{ $route.query.dicover }}
     <section v-if="genre !== null && genreId" class="bg-gray-100 dark:bg-stone-800 py-4">
       <div class="container">
         <div class="filter flex sm:flex-row justify-center items-center w-full px-4 sm:px-0">
@@ -61,25 +62,11 @@ export default {
     }
   },
   async fetch() {
-    if (this.genre !== null && this.$route.query.type !== 'trending/person/day') {
-      this.list = []
-      try {
-        this.$axios.get(`/api?action=discover/movie?with_genres=${this.genreId}&language=tr-TR&sort_by=${this.shortBy}&page=${this.page}`).then((response) => {
-          this.list.push(...response.data.results)
-
-          this.total_pages = response.data.total_pages
-        })
-      } catch (error) {}
-    } else {
-      try {
-        await this.$axios.get(`/api?action=${this.$route.query.type}&language=tr-TR&append_to_response=credits&sort_by=date&page=${this.page}&region=tr`).then((response) => {
-          this.list.push(...response.data.results)
-          this.page = response.data.page
-          this.total_pages = response.data.total_pages
-          // if (process.browser) window.scrollTo({ top: 0, behavior: 'smooth' })
-        })
-      } catch (error) {}
-    }
+    this.list = []
+    await this.$axios.get(`/api?action=${this.$route.query.type ? this.$route.query.type : 'discover/movie'}?with_genres=${this.genreId}&language=tr-TR&sort_by=${this.shortBy}&page=${this.page}`).then((response) => {
+      this.list.push(...response.data.results)
+      this.total_pages = response.data.total_pages
+    })
   },
   fetchOnServer: true,
   watch: {
