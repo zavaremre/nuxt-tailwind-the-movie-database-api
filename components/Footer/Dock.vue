@@ -38,6 +38,10 @@ export default {
       menu: false,
       categories: [
         {
+          title: 'Tümü',
+          id: null,
+        },
+        {
           title: 'Aksiyon',
           id: '28',
         },

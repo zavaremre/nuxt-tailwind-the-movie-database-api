@@ -12,6 +12,7 @@
     <h6 v-if="movie.name" class="text-xxs text-center font-medium leading-3">
       {{ movie.name }}
     </h6>
+    <small class="text-xxs text-center">{{ movie.release_date | formatDate('DD MMMM YYYY') }}</small>
   </div>
 </template>
 

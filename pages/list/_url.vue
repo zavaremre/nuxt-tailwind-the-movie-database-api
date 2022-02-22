@@ -4,7 +4,7 @@
     <section v-if="genre !== null && genreId" class="bg-gray-100 dark:bg-stone-800 py-4">
       <div class="container">
         <div class="filter flex flex-col sm:flex-row justify-center items-center w-full px-4 sm:px-0">
-          <select v-model="shortBy" class="bg-white dark:bg-stone-900 rounded-3xl focus:outline-0 w-full py-2.5 px-4 mr-3 text-md mb-3 sm:mb-0" @change="filter">
+          <select v-model="shortBy" class="bg-white dark:bg-stone-900 rounded-3xl focus:outline-0 w-full py-2.5 px-4 mr-3 text-md mb-3 sm:mb-0">
             <option value="popularity.asc">Popülerlik -(Düşükten Yükseğe)</option>
             <option value="popularity.desc">Popülerlik - (Yüksekten Düşüğe)</option>
             <option value="release_date.asc">Yayın Tarihi - (Düşükten Yükseğe)</option>
@@ -20,8 +20,9 @@
             <option value="vote_count.asc">Oy Sayısı - (Düşükten Yükseğe)</option>
             <option value="vote_count.desc">Oy Sayısı - (Yüksekten Düşüğe)</option>
           </select>
-          <select v-model="year" class="bg-white dark:bg-stone-900 rounded-3xl focus:outline-0 w-full py-2.5 px-4 mr-3 text-md mb-3 sm:mb-0" name="" id="" @change="filter">
+          <select v-model="year" class="bg-white dark:bg-stone-900 rounded-3xl focus:outline-0 w-full py-2.5 px-4 mr-3 text-md mb-3 sm:mb-0" name="">
             <option value="" selected disabled>Film Yılı</option>
+            <option value="">Herhangi Bir Tarih</option>
             <option value="1923">1923</option>
             <option value="1924">1924</option>
             <option value="1925">1925</option>
@@ -123,11 +124,17 @@
             <option value="2021">2021</option>
             <option value="2022">2022</option>
           </select>
-          <select v-model="lang" class="bg-white dark:bg-stone-900 rounded-3xl focus:outline-0 w-full py-2.5 px-4 mr-3 text-md mb-3 sm:mb-0" name="" id="" @change="filter">
+          <select v-model="lang" class="bg-white dark:bg-stone-900 rounded-3xl focus:outline-0 w-full py-2.5 px-4 mr-3 text-md mb-3 sm:mb-0" name="">
             <option value="" selected disabled>Yerlimi - Yabancımı ?</option>
             <option value="tr">Yerli Filmler</option>
             <option value="">Tüm Filmler</option>
           </select>
+          <select v-model="adult" class="bg-white dark:bg-stone-900 rounded-3xl focus:outline-0 w-full py-2.5 px-4 mr-3 text-md mb-3 sm:mb-0" name="">
+            <option value="" selected disabled>+18</option>
+            <option value="true">Yetişkin İçerik Açık</option>
+            <option value="false">Yetişkin İçerik Kapalı</option>
+          </select>
+          <button class="bg-white dark:bg-stone-900 rounded-3xl focus:outline-0 py-2.5 px-4 text-sm font-semibold" @click="filter">Filtrele</button>
         </div>
       </div>
     </section>
@@ -158,6 +165,7 @@
 export default {
   data() {
     return {
+      adult: true,
       year: '',
       with_keywords: '',
       lang: '',
@@ -171,7 +179,7 @@ export default {
   },
   async fetch() {
     this.list = []
-    await this.$axios.get(`/api?action=${this.$route.query.type ? this.$route.query.type : 'discover/movie'}?sort_by=${this.shortBy}&page=${this.page}&certification_country=${this.lang}&with_original_language=${this.lang}&with_genres=${this.genreId}&language=tr-TR`).then((response) => {
+    await this.$axios.get(`/api?action=${this.$route.query.type ? this.$route.query.type : `discover/movie?sort_by=${this.shortBy}&primary_release_year=${this.year}&certification_country=${this.lang}&with_original_language=${this.lang}&with_genres=${this.genreId}`}?&page=${this.page}&language=tr-TR`).then((response) => {
       this.list.push(...response.data.results)
       this.total_pages = response.data.total_pages
     })
@@ -184,7 +192,7 @@ export default {
     filter() {
       this.list = []
       try {
-        this.$axios.get(`/api?action=discover/movie?sort_by=${this.shortBy}&page=${this.page}&certification_country=${this.lang}&with_original_language=${this.lang}&with_genres=${this.genreId}&language=tr-TR`).then((response) => {
+        this.$axios.get(`/api?action=${this.$route.query.type ? this.$route.query.type : `discover/movie?sort_by=${this.shortBy}&primary_release_year=${this.year}&certification_country=${this.lang}&with_original_language=${this.lang}&with_genres=${this.genreId}`}?&page=${this.page}&language=tr-TR`).then((response) => {
           this.list.push(...response.data.results)
 
           this.total_pages = response.data.total_pages
@@ -203,24 +211,13 @@ export default {
       console.log('first')
     },
     fetch() {
-      if (this.genre !== null && this.$route.query.type !== 'trending/person/day') {
-        try {
-          this.$axios.get(`/api?action=discover/movie?sort_by=${this.shortBy}&page=${this.page}&certification_country=${this.lang}&with_original_language=${this.lang}&with_genres=${this.genreId}&language=tr-TR`).then((response) => {
-            this.list.push(...response.data.results)
+      try {
+        this.$axios.get(`/api?action=${this.$route.query.type ? this.$route.query.type : `discover/movie?sort_by=${this.shortBy}&primary_release_year=${this.year}&certification_country=${this.lang}&with_original_language=${this.lang}&with_genres=${this.genreId}`}?&page=${this.page}&language=tr-TR`).then((response) => {
+          this.list.push(...response.data.results)
 
-            this.total_pages = response.data.total_pages
-          })
-        } catch (error) {}
-      } else {
-        try {
-          this.$axios.get(`/api?action=${this.$route.query.type}&language=tr-TR&append_to_response=credits&sort_by=date&page=${this.page}&region=tr`).then((response) => {
-            this.list.push(...response.data.results)
-            this.page = response.data.page
-            this.total_pages = response.data.total_pages
-            // if (process.browser) window.scrollTo({ top: 0, behavior: 'smooth' })
-          })
-        } catch (error) {}
-      }
+          this.total_pages = response.data.total_pages
+        })
+      } catch (error) {}
     },
   },
 }
