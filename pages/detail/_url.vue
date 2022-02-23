@@ -2,7 +2,8 @@
   <div class="w-full">
     <div class="relative flex justify-center items-center w-full h-64 bg-cover bg-blend-overlay bg-black dark:bg-stone-800 bg-opacity-75 after:backdrop-blur-xs after:w-full after:h-full after:absolute after:left-0 after:top-0 after:z-0" :style="`background-image:url(http://image.tmdb.org/t/p/w1280/${detailMovie.backdrop_path})`">
       <div class="container relative z-10 flex justify-center items-center w-full px-5">
-        <img class="w-32 rounded-2xl mr-4" :src="`http://image.tmdb.org/t/p/w1280/${detailMovie.poster_path}`" alt="" />
+        <img class="w-32 rounded-2xl mr-4" :src="`http://image.tmdb.org/t/p/w185/${detailMovie.poster_path}`" alt="" @click="image = 0" />
+        <CoolLightBox name="cool2" :items="[`http://image.tmdb.org/t/p/original/${detailMovie.poster_path}`]" :index="image" :use-zoom-bar="true" :full-screen="true" :close-on-click-outside-mobile="true" @close="image = null"> </CoolLightBox>
         <div class="w-full">
           <h1 class="text-xl font-semibold text-white break-words w-full">{{ detailMovie.title }}</h1>
           <h1 class="text-xxs font-medium text-white truncate whitespace-normal w-full">{{ detailMovie.tagline }}</h1>
@@ -28,7 +29,7 @@
               <h2 class="text-xxs font-medium text-gray-900 dark:text-white">{{ video.published_at | formatDate('DD MMMM YYYY') }}</h2>
             </div>
           </div>
-          <CoolLightBox name="cool" :items="items" :index="index" :autoplay="true" :use-zoom-bar="true" :full-screen="true" :close-on-click-outside-mobile="true" @close="index = null"> </CoolLightBox>
+          <CoolLightBox name="cool" :items="youtube" :index="index" :autoplay="true" :use-zoom-bar="true" :full-screen="true" :close-on-click-outside-mobile="true" @close="index = null"> </CoolLightBox>
         </div>
       </section>
       <section class="py-5 px-5 border-b border-gray-100 dark:border-gray-900">
@@ -55,7 +56,7 @@
         <Titlebar title="YAPIM ŞİRKETLERİ" />
         <div class="relative w-full flex justify-start snap-x snap-mandatory overflow-y-hidden overflow-x-scrol gap-x-4">
           <div v-for="item in detailMovie.production_companies" :key="item.id" class="relative flex justify-center items-center max-w-[25%] min-w-[25%] bg-white rounded-lg p-4">
-            <img v-if="item.logo_path" :src="'http://image.tmdb.org/t/p/w1280/' + item.logo_path" alt="" class="" />
+            <img v-if="item.logo_path" :src="'http://image.tmdb.org/t/p/w154/' + item.logo_path" alt="" class="" />
             <strong v-if="!item.logo_path" class="flex justify-center items-center text-sm font-bold w-full text-center text-gray-800">
               {{ item.name }}
             </strong>
@@ -114,12 +115,15 @@ export default {
   data() {
     return {
       index: null,
-      items: [],
+      image: null,
+      youtube: [],
+
       movieId: this.$route.params.url.split('-').pop(),
       collections: [],
       collectionsList: [],
       collectionsId: null,
       detailMovie: {
+        poster_path: null,
         belongs_to_collection: {},
         external_ids: {
           facebook_id: null,
@@ -144,7 +148,7 @@ export default {
       this.posts = await this.$axios.get(`/api?action=movie/${this.movieId ? this.movieId : this.$route.query.random}&append_to_response=similar_movies,credits,external_ids,include_video,videos,include_video_language,year,with_keywords,with_people,sort_by&sort_by=popularity.asc&page=1&region=tr&language=tr-TR`).then((response) => {
         this.detailMovie = response.data
         response.data.videos.results.forEach((el) => {
-          this.items.push('https://www.youtube.com/watch?v=' + el.key)
+          this.youtube.push('https://www.youtube.com/watch?v=' + el.key)
         })
         this.collections = response.data.belongs_to_collection
         this.collectionsId = response.data.belongs_to_collection.id

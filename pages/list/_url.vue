@@ -179,7 +179,7 @@ export default {
   },
   async fetch() {
     this.list = []
-    await this.$axios.get(`/api?action=${this.$route.query.type ? this.$route.query.type : `discover/movie?sort_by=${this.shortBy}&primary_release_year=${this.year}&certification_country=${this.lang}&with_original_language=${this.lang}&with_genres=${this.genreId}`}?&page=${this.page}&language=tr-TR`).then((response) => {
+    await this.$axios.get(`/api?action=${this.$route.query.type ? this.$route.query.type : `discover/movie?sort_by=${this.shortBy}&primary_release_year=${this.year}&certification_country=${this.lang}&with_original_language=${this.lang}&with_genres=${this.genreId}`}?&page=${this.page}&language=tr-TR&region=tr`).then((response) => {
       this.list.push(...response.data.results)
       this.total_pages = response.data.total_pages
     })
@@ -192,7 +192,7 @@ export default {
     filter() {
       this.list = []
       try {
-        this.$axios.get(`/api?action=${this.$route.query.type ? this.$route.query.type : `discover/movie?sort_by=${this.shortBy}&primary_release_year=${this.year}&certification_country=${this.lang}&with_original_language=${this.lang}&with_genres=${this.genreId}`}?&page=${this.page}&language=tr-TR`).then((response) => {
+        this.$axios.get(`/api?action=${this.$route.query.type ? this.$route.query.type : `discover/movie?sort_by=${this.shortBy}&primary_release_year=${this.year}&certification_country=${this.lang}&with_original_language=${this.lang}&with_genres=${this.genreId}`}?&page=${this.page}&language=tr-TR&region=tr`).then((response) => {
           this.list.push(...response.data.results)
 
           this.total_pages = response.data.total_pages
@@ -212,7 +212,7 @@ export default {
     },
     fetch() {
       try {
-        this.$axios.get(`/api?action=${this.$route.query.type ? this.$route.query.type : `discover/movie?sort_by=${this.shortBy}&primary_release_year=${this.year}&certification_country=${this.lang}&with_original_language=${this.lang}&with_genres=${this.genreId}`}?&page=${this.page}&language=tr-TR`).then((response) => {
+        this.$axios.get(`/api?action=${this.$route.query.type ? this.$route.query.type : `discover/movie?sort_by=${this.shortBy}&primary_release_year=${this.year}&certification_country=${this.lang}&with_original_language=${this.lang}&with_genres=${this.genreId}`}?&page=${this.page}&language=tr-TR&region=tr`).then((response) => {
           this.list.push(...response.data.results)
 
           this.total_pages = response.data.total_pages

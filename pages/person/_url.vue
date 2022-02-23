@@ -102,7 +102,7 @@ export default {
       this.images = images.profiles
 
       images.profiles.forEach((el) => {
-        this.items.push('http://image.tmdb.org/t/p/w342/' + el.file_path)
+        this.items.push('http://image.tmdb.org/t/p/original/' + el.file_path)
       })
     } catch (error) {
       console.log(error.message)
