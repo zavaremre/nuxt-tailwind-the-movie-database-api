@@ -1,5 +1,5 @@
 export default () => ({
-  user: {},
+  isDiscover:false,
   searchingMovies: [],
   genre: 'movie',
   loading: false,

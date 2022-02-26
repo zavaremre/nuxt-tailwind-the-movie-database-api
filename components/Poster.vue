@@ -1,6 +1,6 @@
 <template>
   <div class="movie relative flex flex-col w-full justify-start h-full">
-    <router-link :to="`/detail/${url}`" class="relative h-full">
+    <router-link :to="`/detail/${url}?type=${isRouteLink}`" class="relative h-full">
       <img v-if="movie.poster_path" class="w-full object-cover rounded-xl mb-3" :src="'http://image.tmdb.org/t/p/w185/' + movie.poster_path" />
       <img v-if="!movie.poster_path" class="w-full object-cover rounded-xl mb-3" :src="require('~/assets/images/no.svg')" />
 
@@ -12,7 +12,8 @@
     <h6 v-if="movie.name" class="text-xxs text-center font-medium leading-3">
       {{ movie.name }}
     </h6>
-    <small class="text-xxs text-center">{{ movie.release_date | formatDate('DD MMMM YYYY') }}</small>
+    <small v-if="!isTvSeasons" class="text-xxs text-center">{{ movie.release_date | formatDate('DD MMMM YYYY') }}</small>
+    <small v-if="isTvSeasons" class="text-xxs text-center">{{ movie.air_date | formatDate('DD MMMM YYYY') }}</small>
   </div>
 </template>
 
@@ -26,6 +27,10 @@ export default {
         return {}
       },
     },
+    isTvSeasons: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -33,9 +38,16 @@ export default {
     }
   },
   computed: {
+    isRouteLink() {
+      if (this.$route.name === 'search-url') {
+        return this.movie.media_type ? 'movie' : 'tv'
+      } else {
+        return this.movie.media_type ? 'tv' : 'movie'
+      }
+    },
     url() {
       if (!this.movie || !this.movie.id) return ''
-      return slugify(`${this.movie.title} ${this.movie.id}`, {
+      return slugify(`${this.movie.title ? this.movie.title : this.movie.name} ${this.movie.id}`, {
         replacement: '-',
         remove: undefined,
         lower: true,

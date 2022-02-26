@@ -73,6 +73,7 @@
 </template>
 <script>
 import slugify from 'slugify'
+
 export default {
   methods: {
     url(title) {

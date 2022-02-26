@@ -2,6 +2,9 @@ export default {
   user(state) {
     return state.user
   },
+  isDiscover(state) {
+    return state.isDiscover
+  },
   searchingMovies(state) {
     return state.searchingMovies
   },
