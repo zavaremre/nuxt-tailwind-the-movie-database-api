@@ -1,6 +1,6 @@
 <template>
   <div class="movie relative flex flex-col w-full justify-start h-full">
-    <router-link :to="`/detail/${url}?type=${isRouteLink}`" class="relative h-full">
+    <router-link :to="`/detail/${url}?type=${isRouteLink}`" class="relative h-full" :class="{ 'pointer-events-none': isTvSeasons }">
       <img v-if="movie.poster_path" class="w-full object-cover rounded-xl mb-3" :src="'http://image.tmdb.org/t/p/w185/' + movie.poster_path" />
       <img v-if="!movie.poster_path" class="w-full object-cover rounded-xl mb-3" :src="require('~/assets/images/no.svg')" />
 
@@ -19,6 +19,7 @@
 
 <script>
 import slugify from 'slugify'
+import { mapGetters } from 'vuex'
 export default {
   props: {
     movie: {
@@ -38,11 +39,12 @@ export default {
     }
   },
   computed: {
+    ...mapGetters('global', ['genre']),
     isRouteLink() {
-      if (this.$route.name === 'search-url') {
-        return this.movie.media_type ? 'movie' : 'tv'
+      if (this.movie.name) {
+        return 'tv'
       } else {
-        return this.movie.media_type ? 'tv' : 'movie'
+        return 'movie'
       }
     },
     url() {
