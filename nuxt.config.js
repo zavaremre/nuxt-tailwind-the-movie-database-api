@@ -102,7 +102,7 @@ export default {
   },
   server: {
     port: '10000',
-    host: '0.0.0.0',
+    host: 'https://movie-t10q.onrender.com',
   },
 
   serverMiddleware: [
