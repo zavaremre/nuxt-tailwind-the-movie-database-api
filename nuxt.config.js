@@ -124,11 +124,13 @@ export default {
     '@nuxtjs/pwa',
   ],
   axios: {
+    proxy: true,
     baseUrl: process.env.BASEURL || '',
-  
   },
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxtjs/axios',],
-
+  modules: ['@nuxtjs/axios', '@nuxtjs/proxy'],
+  proxy: {
+    '/api/': { target: '~/server-middleware/tmdb-proxy.controller.js', pathRewrite: { '^/api/': '' }, changeOrigin: true },
+  },
   // Router Settings
 }
