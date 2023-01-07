@@ -101,8 +101,8 @@ export default {
     dirs: ['~/components'],
   },
   server: {
-    port: '10000',
-    host: 'https://movie-t10q.onrender.com',
+    port: '3000',
+    host: '0.0.0.0',
   },
 
   serverMiddleware: [
